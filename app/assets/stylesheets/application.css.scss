@@ -1,0 +1,47 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+.application_title {
+    margin-left: 15px;
+}
+
+.invoice_form {
+    flex-direction: column;
+    width: 40%;
+    margin-left: 30%;
+    margin-right: 30%;
+}
+
+.bill_actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 10px 0 10px;
+}
+
+.create-bill {
+    align-content: flex-end;
+    margin-right: 35px;
+}
+
+.invoice_details {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    margin-top: 10px;
+}

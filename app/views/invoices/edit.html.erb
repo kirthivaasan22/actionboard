@@ -1,0 +1,56 @@
+<body>
+  <div class='invoice_details'>
+    <p style="color:blue;font-size:120%"><%= @invoice.reference %></p>
+    <p style="color:black;font-size:120%">Customer: <%= @invoice.customer %></p>
+    <p style="color:black;font-size:120%">Brand manager: <%= @invoice.brand_manager %></p>
+    <p style="color:black;font-size:120%">Narration: <%= @invoice.narration %></p>
+  </div>
+  <div class='container-fluid'>
+    <div class='row py-10 px-3'>
+      <div class='col-5 col-sm-12'>
+        <table id='invoice-table' class="table table-hover">
+          <thead  class="thead-light">
+            <tr>
+              <th>Date</th>
+              <th>Event</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td><%= @invoice.invoice_date.strftime("%Y-%m-%d") %></td>
+              <td>New Invoice</td>
+              <td><%= @invoice.amount %></td>
+            </tr>
+              <% if @collections.any? %>
+                <% @collections.each do |collection| %>
+                  <tr>
+                    <td><%= collection.collection_date.strftime("%Y-%m-%d") %></td>
+                    <td>Collection</td>
+                    <td><%= collection.amount %></td>
+                  </tr>
+                <% end %>
+              <% end %>
+            <tr>
+              <td></td>
+              <td>Balance due</td>
+              <td><%= @invoice.balance_due %></td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <div class='form_actions'>
+          <button type="button" id="addCollection" class="btn btn-primary" onclick="window.location.href='<%= (new_collection_url + '?id=' + @invoice.id.to_s + '&reference=' + @invoice.reference) %>';" >Add Collection</button>
+          <%= link_to 'Back', invoices_path, class: "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+  var is_bill_collected = <%= @invoice.balance_due == 0 %>;
+  if (is_bill_collected){
+    document.getElementById("addCollection").disabled = true;
+  }
+</script>

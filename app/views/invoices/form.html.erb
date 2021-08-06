@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+  <body>
+    <div class="invoice_form">
+      <form action="/invoices" accept-charset="UTF-8" data-remote="true" method="post">
+        <% if @invoice.present? and @invoice.errors.any? %>   
+          <div id="error_explanation">   
+            <h2><%= pluralize(@invoice.errors.count, "error") %> prohibited this invoice from being saved:</h2>   
+        
+            <ul>   
+            <% @invoice.errors.full_messages.each do |message| %>   
+              <li><%= message %></li>   
+            <% end %>   
+            </ul>   
+          </div>
+        <% end %>
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+        <label for="invoice_customer" class="form-label">Customer</label>:
+        <input type="text" name="invoice[customer]" class="form-control input_box" id="invoice_customer" /><br />
+
+        <label for="invoice_brand_manager" class="form-label">Brand manager</label>:
+        <input type="text" name="invoice[brand_manager]" class="form-control input_box" id="invoice_brand_manager" /><br />
+
+        <label for="invoice_invoice_date" class="form-label">Invoice date</label>:
+        <input type="date" name="invoice[invoice_date]" class="form-control input_box" id="invoice_invoice_date" /><br />
+
+        <label for="invoice_narration" class="form-label">Narration</label>:
+        <input type="text" name="invoice[narration]" class="form-control input_box" id="invoice_narration" /><br />
+
+        <label for="invoice_amount" class="form-label">Amount</label>:
+        <input type="number" name="invoice[amount]" class="form-control input_box" id="invoice_amount" /><br />
+
+        <label for="invoice_reference" class="form-label">Reference</label>:
+        <input type="text" name="invoice[reference]" class="form-control input_box" id="invoice_reference" /><br />
+
+        <input type="submit" name="resource_save" class="btn btn-primary" value="Save Invoice" data-disable-with="Save Invoice" />
+
+        <%= link_to 'Back', invoices_path, class: "btn btn-primary" %>   
+      </form>
+    </div>
+  </body>
+</html>

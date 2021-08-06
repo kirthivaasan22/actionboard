@@ -1,0 +1,7 @@
+<%= stylesheet_link_tag 'application' %>
+<%
+  props = {
+    domain: Rails.application.secrets[:apps][:server]
+  }
+%>
+<%= react_component("ReactView", props: props) %>

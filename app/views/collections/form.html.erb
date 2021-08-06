@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>App</title>
+    <link rel="stylesheet" media="all" href="/assets/application.debug-8a43eeea7df00d2dc5bb7cdd615e57d5eff38da03b2c15864e8b583623b1033e.css" data-turbolinks-track="reload" />
+  </head>
+
+  <body>
+    <div class="invoice_form">
+      <form action="<%= url_for(params.permit!.to_h.slice(:controller, :id).merge(action: 'create')) %>" accept-charset="UTF-8" data-remote="true" method="post">
+        <% if @collection.present? and @collection.errors.any? %>   
+          <div id="error_explanation">   
+            <h2><%= pluralize(@collection.errors.count, "error") %> prohibited this invoice from being saved:</h2>   
+        
+            <ul>   
+            <% @collection.errors.full_messages.each do |message| %>   
+              <li><%= message %></li>   
+            <% end %>   
+            </ul>   
+          </div>   
+        <% end %>
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+
+        <label for="collection_reference" class="form-label">Reference</label><br>
+        <input type="text" class="form-control" id="collection_amount" value="<%= params[:reference] %>" readonly /><br>
+      
+        <label for="collection_amount" class="form-label">Amount</label><br>
+        <input type="number" name="collection[amount]" class="form-control" id="collection_amount" /><br>
+
+        <label for="collection_collection_date" class="form-label">Collection Date</label><br>
+        <input type="date" name="collection[collection_date]" class="form-control" id="collection_collection_date" /><br>
+
+        <input type="submit" class="btn btn-primary" name="create" value="Save" data-disable-with="Save" />
+
+        <%= link_to 'Back', invoices_path, class: "btn btn-primary" %>   
+      </form>
+    </div>
+  </body>
+</html>
